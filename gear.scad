@@ -119,9 +119,10 @@ module gear_stabilizer(){
 }
 
 //base_plate();
+//gear_bottom();
 //both_gears();
 
 //gear_stabilizer();
 
-gear("gear_front.dxf");
-//gear_bottom();
+//gear("gear_front.dxf");
+gear();
