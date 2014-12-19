@@ -29,6 +29,7 @@ module nose(){
 	difference(){
 		union(){
 			cube([4.5,10,15]);
+			cube([8,10,11]);
 			translate([4.5,0,12.0])
 				rotate([0,-45,0]){
 					cube([1,10,4]);

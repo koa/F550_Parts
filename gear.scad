@@ -31,6 +31,10 @@ module gear(file="gear.dxf"){
 			}
 		}	
 		base_plate();
+		translate([40,0,0])
+			cube([20,80,4]);
+		translate([-40-20,0,0])
+			cube([20,80,4]);
 	}
 }
 
@@ -49,8 +53,8 @@ module nose_gear(){
 		rotate([0,-10,0]){
 			translate([-1,-3,0])
 				cube([4,6,10]);			
-			translate([-3,-3,7])
-				cube([6,6,3]);
+			//translate([-3,-3,7])
+				//cube([6,6,3]);
 		}
 	}
 }
@@ -58,7 +62,7 @@ module nose_gear(){
 module both_gears(){
 	gear();
 	rotate([0,0,180])
-		gear();
+		gear("gear_front.dxf");
 }
 
 module schnitt(){
@@ -84,29 +88,29 @@ module gear_bottom(){
 
 module spikel(){
 	translate([38,1,1.2])
-		rotate([-13.5,0,15])
+		rotate([-13.5,0,16])
 			rotate([90,-90,0])
 				translate([0,-15,30])
-					linear_extrude(height=70)
+					linear_extrude(height=170)
 						polygon([[10,0],[0,15],[-10,0]]);
 				
 }
 
-module gear_stabilizer(){
+module gear_stabilizer_intern(file){
 	difference(){
 		translate([57,0,1.5])		
 			rotate([90,0,90])
 				difference(){
 					linear_extrude(height=50){
 						//rotate([13.8,0,0])
-						import("gear_stabilizer.dxf");
+						import(file);
 					}
 					rotate([-11.8,0,0])
-						translate([-100,-100,11])
-							cube([200,80,70]);
+						translate([-100,-200,11])
+							cube([200,180,170]);
 					rotate([-14.8,0,0])
-						translate([-100,-100,-76])
-							cube([200,80,70]);
+						translate([-100,-200,-76])
+							cube([200,180,70]);
 					spikel();
 					mirror([1,0,0])
 						spikel();
@@ -115,14 +119,31 @@ module gear_stabilizer(){
 			both_gears();
 			sphere(r=0.7);
 		}
+		translate([180/-2,70,-129])
+			rotate([-20,0,0])
+				cube([180, 30,50]);
+		rotate([0,0,180])
+		translate([180/-2,70,-129])
+			rotate([-20,0,0])
+				cube([180, 30,50]);
 	}
 }
+
+module gear_stabilizer(){
+	gear_stabilizer_intern("gear_stabilizer.dxf");
+}
+module gear_stabilizer_bottom(){
+	gear_stabilizer_intern("gear_stabilizer_bottom.dxf");
+}
+
 
 //base_plate();
 //gear_bottom();
 //both_gears();
 
-//gear_stabilizer();
+gear_stabilizer();
+gear_stabilizer_bottom();
+
 
 //gear("gear_front.dxf");
-gear();
+//gear();

@@ -69,14 +69,24 @@ module top_part(){
 			translate([-25,-97,7.6])
 				cube([48,55,2.5]);
 			translate([-5,-45,0]){
-					translate([-7.5,0,0])
-						holder(b=7,t=7,h=16);
-					translate([-7.5,-50,0])
-						holder(b=7,t=7,h=17);
-					translate([26.7/-2,-25,0])
-						holder(b=7,t=7,h=17);
-					translate([26.7/2,-25,0])
-						holder(b=7,t=7,h=17);
+					//translate([-7.5,0,0])
+					//	holder(b=7,t=7,h=16);
+					//translate([-7.5,-50,0])
+					//	holder(b=7,t=7,h=17);
+					translate([9,-25,7.6])
+						rotate([90,0,0])
+							linear_extrude(height=20){
+								polygon([[2,0],[2,17],[7,17],[18,0]]);
+							}
+					translate([-9,-45,7.6])
+						rotate([90,0,180])
+							linear_extrude(height=20){
+								polygon([[2,0],[2,17],[7,17],[11.7,0]]);
+							}
+					//translate([26.7/-2,-25,0])
+					//	holder(b=7,t=7,h=17);
+					//translate([26.7/2,-25,0])
+					//	holder(b=7,t=7,h=17);
 			}
 		}
 		translate([48-25-8,-97+39,7.6])

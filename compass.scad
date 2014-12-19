@@ -72,7 +72,7 @@ module halter(){
 }
 
 //buegel();
-stand(h=55);
-//buegel_quer();
+//stand(h=55);
+buegel_quer();
 
 //buzzer();

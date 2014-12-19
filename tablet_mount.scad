@@ -1,8 +1,8 @@
 module cut_case(){
 	projection(cut=true)
-		rotate([0,90,0])
-			translate([-100,0,0])
-				import("Nexus7CaseV2.STL");
+		rotate([90,0,0])
+			translate([-100,-50,30])
+				import("2013_Nexus_7_Case.stl");
 }
 
 module 3drradio(){ 
@@ -30,7 +30,7 @@ module clip(){
 			clip_side();
 }
 module clip_3dr(){
-	translate([0,33.83+5,76.31+5])
+	translate([0,28+5,74.4+5])
 		rotate([-45,180,0]){
 			translate([0,50,5])
 				rotate([90,0,0])
@@ -42,7 +42,7 @@ module side(){
 	difference(){
 		rotate([90,0,90])
 			linear_extrude(height=5) 
-				import("tablet_mount.dxf", $fn=20);
+				import("tablet_mount_2013.dxf", $fn=20);
 		clip();
 		clip_3dr();
 	}
@@ -84,7 +84,7 @@ module base_stabilizer(){
 
 module back_stablilizer(){
 	difference(){
-		translate([0,33.83+5,76.31+5])
+		translate([0,28+5,74.4+5])
 			rotate([-45,180,0]){
 				translate([0,0,5]){
 					difference(){
@@ -111,10 +111,10 @@ module back_stablilizer(){
 		
 	}
 }
-back_stablilizer();
+//back_stablilizer();
 //clip_3dr();
-both_sides();
-base_stabilizer();
-//side();
+//both_sides();
+//base_stabilizer();
+side();
 //side_small();
 //cut_case();
