@@ -1,5 +1,15 @@
 //include<gimbal-mount.scad>
 
+module bolt_hole(l){
+	union(){
+		translate([0,0,0.1])
+			cylinder(d=4.5,h=l-0.2,$fn=20);
+		cylinder(d1=9,d2=8,h=4,$fn=6);
+		translate([0,0,l-4])
+			cylinder(d1=8,d2=9,h=4,$fn=6);
+	}
+}
+
 module holes(){
 	linear_extrude(height=2){
 		import("bottom-plate.dxf", $fn=50);
@@ -7,9 +17,8 @@ module holes(){
 }
 
 module base_plate(){
-	difference(){
-		cylinder(r=80, h=2);
-		holes();
+	linear_extrude(height=2){
+		import("bottom_plate_complete.dxf", $fn=50);
 	}
 }
 
@@ -135,15 +144,45 @@ module gear_stabilizer(){
 module gear_stabilizer_bottom(){
 	gear_stabilizer_intern("gear_stabilizer_bottom.dxf");
 }
+module leg(){	
+	rotate([0,0,30])
+		rotate([90,0,0])
+			translate([0,0,-5]){
+				linear_extrude(height=10)
+					import("leg_long_closed.dxf", $fn=100);
+				//linear_extrude(height=2)
+				//	import("leg_closed.dxf", $fn=100);
+			}
+}
 
+module leg_complete(){
+	difference(){
+		leg();
+		minkowski(){
+			intersection(){
+				rotate([0,0,30])
+					translate([35,-10,-10])
+					cube([60,20,20]);
+				base_plate();
+			}
+			sphere(r=0.4);
+		}
+		rotate([0,0,30])
+			translate([55,0,-6])
+				rotate([0,0,30])
+					bolt_hole(14);
+	}
+}
 
-//base_plate();
+leg_complete();
+
 //gear_bottom();
 //both_gears();
 
-gear_stabilizer();
-gear_stabilizer_bottom();
+//gear_stabilizer();
+//gear_stabilizer_bottom();
 
+				//	import("leg_long.dxf", $fn=100);
 
 //gear("gear_front.dxf");
 //gear();
